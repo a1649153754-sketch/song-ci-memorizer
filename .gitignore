@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+out.txt
+analysis_output.txt
+data_new.js
+inspect_output.txt
+.DS_Store

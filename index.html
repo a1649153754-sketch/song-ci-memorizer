@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宋词导读 - 背诵辅助</title>
+    <link rel="stylesheet" href="styles.css?v=3">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar for Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>宋词背诵录 <span>★</span></h2>
+                <div id="progressBar" class="progress-bar"></div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="搜索词作名...">
+                </div>
+            </div>
+            <ul id="poemList" class="poem-list">
+                <!-- List items injected by JS -->
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="toolbar">
+                    <button class="mode-btn active" data-mode="normal">通读模式</button>
+                    <button class="mode-btn" data-mode="first-char">首字提示</button>
+                    <button class="mode-btn" data-mode="fill-blank">随机挖空</button>
+                    <button class="mode-btn" data-mode="hide-all">全隐回想</button>
+                </div>
+            </header>
+
+            <div class="poem-wrapper">
+                <!-- If no poem selected -->
+                <div id="emptyState" class="empty-state">
+                    <p>请从左侧选择一首宋词开始背诵</p>
+                </div>
+
+                <!-- Active Poem Display -->
+                <article id="activePoem" class="poem-display hidden">
+                    <h1 id="poemTitle" class="poem-title"></h1>
+                    <h2 id="poemAuthor" class="poem-author"></h2>
+                    <div id="memoryStatus" class="memory-status"></div>
+                    <div id="poemContent" class="poem-body normal-mode">
+                        <!-- Content injected by JS -->
+                    </div>
+                </article>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Data script loads the global variable asteriskWorks -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
