@@ -27,15 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
     }
 
-    function toggleMemory(title) {
+    function toggleMemory(index) {
+        const key = String(index);
         const records = loadMemoryRecords();
-        if (records[title]) {
-            delete records[title];
+        if (records[key]) {
+            delete records[key];
         } else {
             const now = new Date();
             const m = now.getMonth() + 1;
             const d = now.getDate();
-            records[title] = `${m}月${d}日`;
+            records[key] = `${m}月${d}日`;
         }
         saveMemoryRecords(records);
         renderMemoryStatus();
@@ -45,16 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderMemoryStatus() {
         if (currentIndex === -1) return;
-        const work = asteriskWorks[currentIndex];
         const records = loadMemoryRecords();
-        const date = records[work.title];
+        const date = records[String(currentIndex)];
         memoryStatus.innerHTML = '';
         if (date) {
             memoryStatus.innerHTML = `<span class="memory-done">✅ 已于 ${date} 完成背诵</span><button class="memory-btn memory-btn-undo" id="memToggleBtn">取消标记</button>`;
         } else {
             memoryStatus.innerHTML = `<span class="memory-not">尚未标记背诵</span><button class="memory-btn memory-btn-mark" id="memToggleBtn">📝 标记已背</button>`;
         }
-        document.getElementById('memToggleBtn').addEventListener('click', () => toggleMemory(work.title));
+        document.getElementById('memToggleBtn').addEventListener('click', () => toggleMemory(currentIndex));
     }
 
     function renderProgress() {
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const titleSpan = document.createElement('span');
                 titleSpan.textContent = work.title;
                 li.appendChild(titleSpan);
-                if (records[work.title]) {
+                if (records[String(idx)]) {
                     const check = document.createElement('span');
                     check.className = 'mem-check';
                     check.textContent = '✓';
