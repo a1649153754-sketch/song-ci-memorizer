@@ -59,6 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderProgress() {
         const records = loadMemoryRecords();
+        // Clean up any old title-based keys (non-numeric)
+        let cleaned = false;
+        for (const key of Object.keys(records)) {
+            if (isNaN(key)) { delete records[key]; cleaned = true; }
+        }
+        if (cleaned) saveMemoryRecords(records);
         const total = asteriskWorks.length;
         const done = Object.keys(records).length;
         progressBar.textContent = `已背 ${done} / ${total}`;
